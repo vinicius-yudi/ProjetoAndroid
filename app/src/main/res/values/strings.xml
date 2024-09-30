@@ -4,7 +4,7 @@
     <string name="hint_email">E-mail</string>
     <string name="hint_senha">Senha</string>
     <string name="txt_button_entrar">Entrar</string>
-    <string name="txt_tela_cadastro">Não tem conta? Cadastra-se!</string>
+    <string name="txt_tela_cadastro">Clique aqui para se Cadastrar!</string>
 
 
 </resources>
