@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity() {
     private fun navegarTelaPrincipal() {
         val intent = Intent(this, TelaPrincipal::class.java)
         startActivity(intent)
-        finish()
     }
 
 
