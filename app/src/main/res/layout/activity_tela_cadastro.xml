@@ -14,6 +14,36 @@
     android:background="@color/dark_cyan_green"
     tools:context=".TelaCadastro">
 
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txtInputLayoutSenha"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="373dp"
+      android:layout_height="65dp"
+      android:layout_marginTop="5dp"
+      app:boxStrokeColor="@color/dark_cyan_green"
+      app:errorEnabled="true"
+      app:errorTextColor="@color/red"
+      app:hintAnimationEnabled="true"
+      app:hintTextColor="@color/black"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/txtInputLayoutEmail"
+      app:passwordToggleEnabled="true"
+      tools:ignore="ExtraText">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editSenha"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:background="@drawable/background_edittext"
+        android:hint="@string/hint_senha"
+        android:inputType="textPassword"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:textSize="18sp" />
+  </com.google.android.material.textfield.TextInputLayout>
+
   <View
       android:id="@+id/containerDown"
       android:layout_width="411dp"
@@ -40,9 +70,10 @@
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/txtInputLayoutEmail"
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_width="373dp"
+      android:layout_height="65dp"
       android:layout_marginStart="20dp"
+      android:layout_marginTop="81dp"
       android:layout_marginEnd="20dp"
       app:boxStrokeColor="@color/dark_cyan_green"
       app:errorEnabled="true"
@@ -52,13 +83,13 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      tools:layout_editor_absoluteY="165dp"
-      tools:ignore="MissingConstraints" />
+      app:layout_constraintTop_toBottomOf="@+id/view2"
+      tools:ignore="MissingConstraints">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:background="@drawable/background_edittext"
         android:drawableEnd="@drawable/ic_email"
         android:hint="@string/hint_email"
@@ -67,33 +98,30 @@
         android:maxLines="1"
         android:padding="15dp"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="143dp"
         tools:ignore="MissingConstraints" />
+  </com.google.android.material.textfield.TextInputLayout>
 
   <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/txtInputLayoutSenha"
+      android:id="@+id/txtInputLayoutConfirmarSenha"
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-      android:layout_width="412dp"
-      android:layout_height="59dp"
-      android:layout_marginStart="20dp"
-      android:layout_marginTop="48dp"
+      android:layout_width="373dp"
+      android:layout_height="65dp"
+      android:layout_marginTop="68dp"
       app:boxStrokeColor="@color/dark_cyan_green"
       app:errorEnabled="true"
       app:errorTextColor="@color/red"
       app:hintAnimationEnabled="true"
       app:hintTextColor="@color/black"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/txtInputLayoutEmail"
       app:passwordToggleEnabled="true"
       tools:ignore="ExtraText">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editSenha"
+        android:id="@+id/editConfirmarSenha"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:background="@drawable/background_edittext"
         android:hint="@string/hint_senha"
         android:inputType="textPassword"
