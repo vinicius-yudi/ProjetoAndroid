@@ -17,18 +17,17 @@
   <View
       android:id="@+id/containerDown"
       android:layout_width="411dp"
-      android:layout_height="120dp"
+      android:layout_height="71dp"
       android:background="@drawable/background_view_down"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent" />
 
-
   <View
       android:id="@+id/view2"
-      android:layout_width="135dp"
-      android:layout_height="135dp"
+      android:layout_width="86dp"
+      android:layout_height="84dp"
       android:background="@drawable/background_view_top"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +35,73 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.0" />
+
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txtInputLayoutEmail"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp"
+      app:boxStrokeColor="@color/dark_cyan_green"
+      app:errorEnabled="true"
+      app:errorTextColor="@color/red"
+      app:hintAnimationEnabled="true"
+      app:hintTextColor="@color/black"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:layout_editor_absoluteY="165dp"
+      tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_edittext"
+        android:drawableEnd="@drawable/ic_email"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="143dp"
+        tools:ignore="MissingConstraints" />
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txtInputLayoutSenha"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="412dp"
+      android:layout_height="59dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="48dp"
+      app:boxStrokeColor="@color/dark_cyan_green"
+      app:errorEnabled="true"
+      app:errorTextColor="@color/red"
+      app:hintAnimationEnabled="true"
+      app:hintTextColor="@color/black"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/txtInputLayoutEmail"
+      app:passwordToggleEnabled="true"
+      tools:ignore="ExtraText">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_edittext"
+        android:hint="@string/hint_senha"
+        android:inputType="textPassword"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:textSize="18sp" />
+  </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
