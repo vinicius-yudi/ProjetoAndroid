@@ -58,8 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutCpf"
-        app:passwordToggleEnabled="true"
-        tools:ignore="ExtraText,MissingConstraints">
+        tools:ignore="MissingConstraints">
 
       <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/editTelefone"
@@ -88,8 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutConfirmarSenha"
-        app:passwordToggleEnabled="true"
-        tools:ignore="ExtraText,MissingConstraints">
+        tools:ignore="MissingConstraints">
 
       <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/editCpf"
