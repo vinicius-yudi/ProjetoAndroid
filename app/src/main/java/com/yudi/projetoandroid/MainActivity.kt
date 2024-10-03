@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Lógica para o botão Entrar
-        binding.btEntrar.setOnClickListener {
+        binding.btnEntrar.setOnClickListener {
 
             val email = binding.editEmail.text.toString()
             val senha = binding.editSenha.text.toString()
@@ -70,25 +70,47 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun login(view: View) {
-        val progressbar = binding.progressBar
-        progressbar.visibility = View.VISIBLE
+        val email = binding.editEmail.text.toString()
+        val senha = binding.editSenha.text.toString()
 
-        binding.btEntrar.isEnabled = false
-        binding.btEntrar.setTextColor(Color.parseColor("#FFFFFF"))
+        // Desabilitar o botão durante o processamento
+        binding.btnEntrar.isEnabled = false
+        binding.btnEntrar.setTextColor(Color.parseColor("#FFFFFF"))
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            navegarTelaPrincipal()
-            val snackbar = Snackbar.make(view, "Login realizado com sucesso!", Snackbar.LENGTH_SHORT)
-            snackbar.show()
-        }, 3000)
+        // Verificar se os campos estão preenchidos corretamente
+        when {
+            email.isEmpty() -> {
+                binding.editEmail.error = "Preencha o E-mail!"
+                binding.btnEntrar.isEnabled = true
+                return
+            }
+            senha.isEmpty() -> {
+                binding.editSenha.error = "Preencha a Senha!"
+                binding.btnEntrar.isEnabled = true
+                return
+            }
+            else -> {
+                // Chamar a função para verificar o login no banco de dados
+                val bancoDeDados = MeuBancoDeDados(this)
+                val loginValido = bancoDeDados.verificarLogin(email, senha)
+
+                if (loginValido) {
+                    // Login bem-sucedido
+                    navegarTelaPrincipal()
+                    val snackbar = Snackbar.make(view, "Login realizado com sucesso!", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
+                } else {
+                    // Login falhou
+                    binding.btnEntrar.isEnabled = true
+                    val snackbar = Snackbar.make(view, "E-mail ou senha incorretos!", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
+                }
+            }
+        }
     }
 
     private fun navegarTelaPrincipal() {
         val intent = Intent(this, TelaPrincipal::class.java)
         startActivity(intent)
     }
-
-
-
-
 }

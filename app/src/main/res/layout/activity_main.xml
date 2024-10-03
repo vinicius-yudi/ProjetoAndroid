@@ -100,7 +100,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btEntrar"
+        android:id="@+id/btnEntrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txt_button_entrar"
@@ -130,7 +130,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btEntrar" />
+        app:layout_constraintTop_toBottomOf="@id/btnEntrar" />
 
     <ProgressBar
         android:id="@+id/progressBar"

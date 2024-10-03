@@ -9,14 +9,11 @@
     tools:context=".TelaPrincipal">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/usuariosTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lista de alguma coisa"
-        android:textSize="30sp"
-        android:textColor="@color/dark_cyan_green"
-        android:textStyle="bold"
-
-
-        />
+        android:textColor="@android:color/black"
+        android:padding="16dp"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>
