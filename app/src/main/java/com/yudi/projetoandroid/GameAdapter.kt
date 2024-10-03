@@ -5,10 +5,12 @@ import android.database.Cursor
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
-class GameAdapter(private val cursor: Cursor, private val context: Context, private val userId: Int) :
+class GameAdapter(private var cursor: Cursor, private val context: Context, private val userId: Int) :
     RecyclerView.Adapter<GameAdapter.GameViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
@@ -18,9 +20,10 @@ class GameAdapter(private val cursor: Cursor, private val context: Context, priv
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         if (cursor.moveToPosition(position)) {
+            val jogoId = cursor.getInt(cursor.getColumnIndexOrThrow("Id_Jogo"))
             val nome = cursor.getString(cursor.getColumnIndexOrThrow("Nome"))
             val tipo = cursor.getString(cursor.getColumnIndexOrThrow("Tipo"))
-            holder.bind(nome, tipo)
+            holder.bind(jogoId, nome, tipo)
         }
     }
 
@@ -28,13 +31,31 @@ class GameAdapter(private val cursor: Cursor, private val context: Context, priv
         return cursor.count
     }
 
-    class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun updateCursor(newCursor: Cursor) {
+        cursor.close()
+        cursor = newCursor
+        notifyDataSetChanged()
+    }
+
+    inner class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nomeTextView: TextView = itemView.findViewById(R.id.tvGameName)
         private val tipoTextView: TextView = itemView.findViewById(R.id.tvGameType)
+        private val removeButton: Button = itemView.findViewById(R.id.btnRemoveFavorite)
 
-        fun bind(nome: String, tipo: String) {
+        fun bind(jogoId: Int, nome: String, tipo: String) {
             nomeTextView.text = nome
             tipoTextView.text = tipo
+
+            removeButton.setOnClickListener {
+                val db = MeuBancoDeDados(context)
+                val result = db.removerFavorito(userId, jogoId)
+                if (result > 0) {
+                    Snackbar.make(itemView, "Favorito removido com sucesso!", Snackbar.LENGTH_SHORT).show()
+                    updateCursor(db.obterFavoritos(userId))
+                } else {
+                    Snackbar.make(itemView, "Erro ao remover o favorito!", Snackbar.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

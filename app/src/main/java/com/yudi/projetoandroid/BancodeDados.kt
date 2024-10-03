@@ -207,6 +207,7 @@ override fun onCreate(db: SQLiteDatabase) {
         return db.rawQuery(query, null)
     }
 
+    @Deprecated(message = "Não utilizado")
     fun obterUserIdPeloLogin(email: String): Int? {
         val db = this.readableDatabase
         val query = "SELECT id FROM User WHERE User.email = ?"
@@ -233,7 +234,7 @@ override fun onCreate(db: SQLiteDatabase) {
 
     fun obterFavoritos(userId: Int): Cursor {
         val db = this.readableDatabase
-        val query = "SELECT Jogo.Nome, Jogo.Tipo FROM Favorita INNER JOIN Jogo ON Favorita.fk_Jogo_Id_Jogo = Jogo.Id_Jogo WHERE Favorita.fk_User_Id_User = ?"
+        val query = "SELECT Jogo.Id_Jogo, Jogo.Nome, Jogo.Tipo FROM Favorita INNER JOIN Jogo ON Favorita.fk_Jogo_Id_Jogo = Jogo.Id_Jogo WHERE Favorita.fk_User_Id_User = ?"
         return db.rawQuery(query, arrayOf(userId.toString()))
     }
 
@@ -244,6 +245,11 @@ override fun onCreate(db: SQLiteDatabase) {
             put("fk_Jogo_Id_Jogo", jogoId)
         }
         return db.insert("Favorita", null, values)
+    }
+
+    fun removerFavorito(userId: Int, jogoId: Int): Int {
+        val db = this.writableDatabase
+        return db.delete("Favorita", "fk_User_Id_User = ? AND fk_Jogo_Id_Jogo = ?", arrayOf(userId.toString(), jogoId.toString()))
     }
 
 }
