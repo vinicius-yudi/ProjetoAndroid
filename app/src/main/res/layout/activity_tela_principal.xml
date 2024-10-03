@@ -8,6 +8,13 @@
     android:gravity="center"
     tools:context=".TelaPrincipal">
 
+    <Button
+        android:id="@+id/btnJogos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ir para Jogos"
+        android:layout_marginTop="20dp" />
+
     <TextView
         android:id="@+id/usuariosTextView"
         android:layout_width="match_parent"
@@ -15,5 +22,8 @@
         android:textColor="@android:color/black"
         android:padding="16dp"
         android:layout_marginTop="20dp" />
+
+
+
 
 </LinearLayout>

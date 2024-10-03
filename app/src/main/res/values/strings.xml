@@ -10,6 +10,19 @@
     <string name="txt_button_Salvar">Salvar</string>
     <string name="txt_tela_cadastro">Clique aqui para se Cadastrar!</string>
     <string name="txt_JaTenhoCadastro">Ja possuo cadastro!</string>
+    <string name="nome_do_jogo">Nome do Jogo</string>
 
+    <string-array name="game_genres">
+        <item>Aventura</item>
+        <item>Simulação</item>
+        <item>Tiro</item>
+        <item>Luta</item>
+        <item>Corrida</item>
+        <item>Ação</item>
+        <item>Sandbox</item>
+        <item>Multiplayer</item>
+        <item>Plataforma</item>
+    </string-array>
 
 </resources>
+

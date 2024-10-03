@@ -18,6 +18,9 @@
         <activity
             android:name=".TelaPrincipal"
             android:exported="false" />
+	<activity
+	    android:name=".TelaGame"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" >

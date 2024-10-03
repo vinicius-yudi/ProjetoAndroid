@@ -50,17 +50,11 @@ class MainActivity : AppCompatActivity() {
                     val snackbar = Snackbar.make(it, "E-mail inválido!", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }
-                senha.length <= 5 -> {
-                    val snackbar = Snackbar.make(it, "A senha deve ter pelo menos 6 caracteres!", Snackbar.LENGTH_SHORT)
-                    snackbar.show()
-                }
                 else -> {
                     login(it)
                 }
             }
         }
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -73,11 +67,9 @@ class MainActivity : AppCompatActivity() {
         val email = binding.editEmail.text.toString()
         val senha = binding.editSenha.text.toString()
 
-        // Desabilitar o botão durante o processamento
         binding.btnEntrar.isEnabled = false
         binding.btnEntrar.setTextColor(Color.parseColor("#FFFFFF"))
 
-        // Verificar se os campos estão preenchidos corretamente
         when {
             email.isEmpty() -> {
                 binding.editEmail.error = "Preencha o E-mail!"
@@ -90,17 +82,14 @@ class MainActivity : AppCompatActivity() {
                 return
             }
             else -> {
-                // Chamar a função para verificar o login no banco de dados
                 val bancoDeDados = MeuBancoDeDados(this)
                 val loginValido = bancoDeDados.verificarLogin(email, senha)
 
                 if (loginValido) {
-                    // Login bem-sucedido
                     navegarTelaPrincipal()
                     val snackbar = Snackbar.make(view, "Login realizado com sucesso!", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 } else {
-                    // Login falhou
                     binding.btnEntrar.isEnabled = true
                     val snackbar = Snackbar.make(view, "E-mail ou senha incorretos!", Snackbar.LENGTH_SHORT)
                     snackbar.show()

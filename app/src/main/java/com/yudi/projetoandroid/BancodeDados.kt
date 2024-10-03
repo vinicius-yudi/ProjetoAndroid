@@ -2,6 +2,7 @@ package com.yudi.projetoandroid
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -12,48 +13,150 @@ class MeuBancoDeDados(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, 
         private const val VERSION = 1
     }
 
-    override fun onCreate(db: SQLiteDatabase) {
-        val sql =  """
-        -- Criação da tabela User
-        CREATE TABLE User (
-            Id_User INTEGER PRIMARY KEY,
-            Nome VARCHAR(255),
-            Email VARCHAR(255) unique,
-            Senha VARCHAR(255),
-            Cpf VARCHAR(20) unique,
-            Telefone VARCHAR(16)
-        );
-        
-        CREATE TABLE Jogo (
-            Id_Jogo INTEGER PRIMARY KEY,
-            Nome VARCHAR(255),
-            Tipo VARCHAR(255)
-        );
-        
-        -- Criação da tabela Favorita para armazenar as relações entre User e Jogo
-        CREATE TABLE Favorita (
-            fk_User_Id_User INTEGER,
-            fk_Jogo_Id_Jogo INTEGER
-        );
-        
-        -- Adicionando restrição para chave estrangeira em Favorita que referencia User
-        ALTER TABLE Favorita ADD CONSTRAINT FK_Favorita_1
-            FOREIGN KEY (fk_User_Id_User)
-            REFERENCES User (Id_User)
-            ON DELETE RESTRICT;
-        
-        -- Adicionando restrição para chave estrangeira em Favorita que referencia Jogo
-        ALTER TABLE Favorita ADD CONSTRAINT FK_Favorita_2
-            FOREIGN KEY (fk_Jogo_Id_Jogo)
-            REFERENCES Jogo (Id_Jogo)
-            ON DELETE SET NULL;
+override fun onCreate(db: SQLiteDatabase) {
+    val sqlUser = """
+    -- Criação da tabela User
+    CREATE TABLE User (
+        Id_User INTEGER PRIMARY KEY,
+        Nome VARCHAR(255),
+        Email VARCHAR(255) UNIQUE,
+        Senha VARCHAR(255),
+        Cpf VARCHAR(20) UNIQUE,
+        Telefone VARCHAR(16)
+    );
     """.trimIndent()
 
-        db.execSQL(sql)
+    val sqlJogo = """
+    CREATE TABLE Jogo (
+        Id_Jogo INTEGER PRIMARY KEY,
+        Nome VARCHAR(255) NOT NULL,
+        Tipo VARCHAR(255) NOT NULL
+    );
+    """.trimIndent()
+
+    val sqlFavorita = """
+        CREATE TABLE Favorita (
+            fk_User_Id_User INTEGER,
+            fk_Jogo_Id_Jogo INTEGER,
+            FOREIGN KEY (fk_User_Id_User) REFERENCES User (Id_User) ON DELETE RESTRICT,
+            FOREIGN KEY (fk_Jogo_Id_Jogo) REFERENCES Jogo (Id_Jogo) ON DELETE SET NULL
+        );
+
+    """.trimIndent()
+
+
+
+    db.execSQL(sqlUser)
+    db.execSQL(sqlJogo)
+    db.execSQL(sqlFavorita)
+
+
+        val popularTabelaJogo = """
+            INSERT INTO Jogo (Nome, Tipo) VALUES
+            ('The Legend of Zelda', 'Aventura'),
+            ('Super Mario Odyssey', 'Plataforma'),
+            ('Fortnite', 'Tiro'),
+            ('Call of Duty', 'Tiro'),
+            ('FIFA 22', 'Simulação'),
+            ('Red Dead Redemption 2', 'Aventura'),
+            ('Minecraft', 'Sandbox'),
+            ('Overwatch', 'Tiro'),
+            ('Final Fantasy XV', 'Ação'),
+            ('Assassins Creed Valhalla', 'Aventura'),
+            ('League of Legends', 'Multiplayer'),
+            ('Dota 2', 'Multiplayer'),
+            ('Apex Legends', 'Tiro'),
+            ('Cyberpunk 2077', 'Ação'),
+            ('Hades', 'Ação'),
+            ('Among Us', 'Multiplayer'),
+            ('Fall Guys', 'Multiplayer'),
+            ('Resident Evil Village', 'Aventura'),
+            ('Horizon Zero Dawn', 'Aventura'),
+            ('The Witcher 3 Wild Hunt', 'Aventura'),
+            ('God of War', 'Ação'),
+            ('Ghost of Tsushima', 'Ação'),
+            ('Battlefield V', 'Tiro'),
+            ('Valorant', 'Tiro'),
+            ('Rocket League', 'Corrida'),
+            ('Gran Turismo 7', 'Corrida'),
+            ('The Sims 4', 'Simulação'),
+            ('Animal Crossing: New Horizons', 'Simulação'),
+            ('Stardew Valley', 'Simulação'),
+            ('Persona 5', 'Aventura'),
+            ('Dark Souls III', 'Ação'),
+            ('Sekiro: Shadows Die Twice', 'Ação'),
+            ('Monster Hunter: World', 'Ação'),
+            ('Genshin Impact', 'Aventura'),
+            ('PUBG', 'Tiro'),
+            ('Hitman', 'Ação'),
+            ('No Mans Sky', 'Aventura'),
+            ('DOOM Eternal', 'Tiro'),
+            ('Cuphead', 'Plataforma'),
+            ('Hollow Knight', 'Plataforma'),
+            ('Ori and the Will of the Wisps', 'Plataforma'),
+            ('Mortal Kombat 11', 'Luta'),
+            ('Street Fighter V', 'Luta'),
+            ('Tekken 7', 'Luta'),
+            ('NBA 2K22', 'Simulação'),
+            ('PES 2021', 'Simulação'),
+            ('F1 2021', 'Corrida'),
+            ('Need for Speed Heat', 'Corrida'),
+            ('Forza Horizon 5', 'Corrida'),
+            ('Crash Bandicoot 4', 'Plataforma'),
+            ('Sonic Mania', 'Plataforma'),
+            ('Borderlands 3', 'Tiro'),
+            ('Far Cry 6', 'Tiro'),
+            ('Just Cause 4', 'Ação'),
+            ('Spider-Man: Miles Morales', 'Aventura'),
+            ('Control', 'Aventura'),
+            ('Halo Infinite', 'Tiro'),
+            ('Warframe', 'Ação'),
+            ('Splatoon 2', 'Tiro'),
+            ('Super Smash Bros. Ultimate', 'Luta'),
+            ('Street Fighter IV', 'Luta'),
+            ('Tekken 6', 'Luta'),
+            ('Mario Kart 8 Deluxe', 'Corrida'),
+            ('Crash Team Racing', 'Corrida'),
+            ('Gran Turismo Sport', 'Corrida'),
+            ('NFS Most Wanted', 'Corrida'),
+            ('Yakuza: Like a Dragon', 'Aventura'),
+            ('Dead by Daylight', 'Multiplayer'),
+            ('The Division 2', 'Multiplayer'),
+            ('Phasmophobia', 'Multiplayer'),
+            ('RimWorld', 'Simulação'),
+            ('SimCity', 'Simulação'),
+            ('Cities: Skylines', 'Simulação'),
+            ('Terraria', 'Sandbox'),
+            ('Starbound', 'Sandbox'),
+            ('Rust', 'Sandbox'),
+            ('ARK Survival Evolved', 'Sandbox'),
+            ('7 Days to Die', 'Sandbox'),
+            ('Portal 2', 'Plataforma'),
+            ('Celeste', 'Plataforma'),
+            ('Rayman Legends', 'Plataforma'),
+            ('Donkey Kong Country: Tropical Freeze', 'Plataforma'),
+            ('LittleBigPlanet 3', 'Plataforma'),
+            ('Shovel Knight', 'Plataforma'),
+            ('Brawlhalla', 'Luta'),
+            ('Guilty Gear Strive', 'Luta'),
+            ('Dragon Ball FighterZ', 'Luta'),
+            ('Dirt Rally 2.0', 'Corrida'),
+            ('Project CARS 2', 'Corrida'),
+            ('Wipeout Omega Collection', 'Corrida'),
+            ('TrackMania Turbo', 'Corrida'),
+            ('Mad Max', 'Ação'),
+            ('Watch Dogs: Legion', 'Ação'),
+            ('Tomb Raider', 'Aventura'),
+            ('Rise of the Tomb Raider', 'Aventura'),
+            ('Journey', 'Aventura'),
+            ('Shadow of the Colossus', 'Aventura');
+        """.trimIndent()
+
+        db.execSQL(popularTabelaJogo)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-
+        //NÃO inserir dados aqui
     }
 
     fun inserirUsuario(nome: String, email: String, senha: String, cpf: String, telefone: String): Long {
@@ -80,29 +183,26 @@ class MeuBancoDeDados(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, 
         return loginValido
     }
 
-    fun obterUsuarios(): List<Usuario> {
-        val listaUsuarios = mutableListOf<Usuario>()
-        val db = this.readableDatabase
-        val query = "SELECT * FROM User"
-        val cursor = db.rawQuery(query, null)
+    fun obterJogos(): List<Jogo> {
+    val listaJogos = mutableListOf<Jogo>()
+    val db = this.readableDatabase
+    val query = "SELECT * FROM Jogo order by tipo"
+    val cursor = db.rawQuery(query, null)
 
-        if (cursor.moveToFirst()) {
-            do {
-                val idUser = cursor.getInt(cursor.getColumnIndexOrThrow("Id_User"))
-                val nome = cursor.getString(cursor.getColumnIndexOrThrow("Nome"))
-                val email = cursor.getString(cursor.getColumnIndexOrThrow("Email"))
-                val senha = cursor.getString(cursor.getColumnIndexOrThrow("Senha"))
-                val cpf = cursor.getString(cursor.getColumnIndexOrThrow("Cpf"))
-                val telefone = cursor.getString(cursor.getColumnIndexOrThrow("Telefone"))
+    if (cursor.moveToFirst()) {
+        do {
+            val idJogo = cursor.getInt(cursor.getColumnIndexOrThrow("Id_Jogo"))
+            val nome = cursor.getString(cursor.getColumnIndexOrThrow("Nome"))
+            val tipo = cursor.getString(cursor.getColumnIndexOrThrow("Tipo"))
 
-                val usuario = Usuario(idUser, nome, email, senha, cpf, telefone)
-                listaUsuarios.add(usuario)
-            } while (cursor.moveToNext())
-        }
-
-        cursor.close()
-        db.close()
-        return listaUsuarios
+            val jogo = Jogo(idJogo, nome, tipo)
+            listaJogos.add(jogo)
+        } while (cursor.moveToNext())
     }
+
+    cursor.close()
+    db.close()
+    return listaJogos
+}
 
 }
