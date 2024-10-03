@@ -1,14 +1,18 @@
 package com.yudi.projetoandroid
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.snackbar.Snackbar
 
 class TelaPrincipal : AppCompatActivity() {
 
@@ -40,17 +44,76 @@ class TelaPrincipal : AppCompatActivity() {
         mostrarJogos()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun mostrarJogos() {
         val db = MeuBancoDeDados(this)
         val jogos = db.obterJogos()
 
-        val jogosTextView: TextView = findViewById(R.id.jogosTextView)
-        val sb = StringBuilder()
+        val jogosTextView: LinearLayout = findViewById(R.id.jogosTextView)
+        jogosTextView.removeAllViews()
 
         for (jogo in jogos) {
-            sb.append("Nome: ${jogo.nome}, Tipo: ${jogo.tipo}\n")
-        }
+            val jogoLayout = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(0, 0, 0, 16)
+                }
+                setBackgroundResource(R.drawable.rounded_background)
+                setPadding(16, 16, 16, 16)
+            }
 
-        jogosTextView.text = sb.toString()
+            val gameNameTextView = TextView(this).apply {
+                text = "Nome: ${jogo.nome}"
+                textSize = 18f
+                setTextColor(Color.BLACK)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    gravity = Gravity.CENTER_HORIZONTAL
+                }
+            }
+
+            val gameTypeTextView = TextView(this).apply {
+                text = "Tipo: ${jogo.tipo}"
+                textSize = 14f
+                setTextColor(Color.BLACK)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    gravity = Gravity.CENTER_HORIZONTAL
+                    topMargin = 8
+                }
+            }
+
+            val favoriteButton = Button(this).apply {
+                text = "Favoritar"
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    gravity = Gravity.CENTER_HORIZONTAL
+                    topMargin = 8
+                }
+                setOnClickListener {
+                    val result = db.adicionarFavorito(userId, jogo.idJogo)
+                    if (result != -1L) {
+                        Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo favoritado com sucesso!", Snackbar.LENGTH_SHORT).show()
+                    } else {
+                        Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Erro ao favoritar o jogo!", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            jogoLayout.addView(gameNameTextView)
+            jogoLayout.addView(gameTypeTextView)
+            jogoLayout.addView(favoriteButton)
+
+            jogosTextView.addView(jogoLayout)
+        }
     }
 }

@@ -52,104 +52,104 @@ override fun onCreate(db: SQLiteDatabase) {
     db.execSQL(sqlFavorita)
 
     val popularTabelaJogo = """
-        INSERT INTO Jogo (Nome, Tipo) VALUES
-            ('The Legend of Zelda', 'Aventura'),
-            ('Super Mario Odyssey', 'Plataforma'),
-            ('Fortnite', 'Tiro'),
-            ('Call of Duty', 'Tiro'),
-            ('FIFA 22', 'Simulação'),
-            ('Red Dead Redemption 2', 'Aventura'),
-            ('Minecraft', 'Sandbox'),
-            ('Overwatch', 'Tiro'),
-            ('Final Fantasy XV', 'Ação'),
-            ('Assassins Creed Valhalla', 'Aventura'),
-            ('League of Legends', 'Multiplayer'),
-            ('Dota 2', 'Multiplayer'),
-            ('Apex Legends', 'Tiro'),
-            ('Cyberpunk 2077', 'Ação'),
-            ('Hades', 'Ação'),
-            ('Among Us', 'Multiplayer'),
-            ('Fall Guys', 'Multiplayer'),
-            ('Resident Evil Village', 'Aventura'),
-            ('Horizon Zero Dawn', 'Aventura'),
-            ('The Witcher 3 Wild Hunt', 'Aventura'),
-            ('God of War', 'Ação'),
-            ('Ghost of Tsushima', 'Ação'),
-            ('Battlefield V', 'Tiro'),
-            ('Valorant', 'Tiro'),
-            ('Rocket League', 'Corrida'),
-            ('Gran Turismo 7', 'Corrida'),
-            ('The Sims 4', 'Simulação'),
-            ('Animal Crossing: New Horizons', 'Simulação'),
-            ('Stardew Valley', 'Simulação'),
-            ('Persona 5', 'Aventura'),
-            ('Dark Souls III', 'Ação'),
-            ('Sekiro: Shadows Die Twice', 'Ação'),
-            ('Monster Hunter: World', 'Ação'),
-            ('Genshin Impact', 'Aventura'),
-            ('PUBG', 'Tiro'),
-            ('Hitman', 'Ação'),
-            ('No Mans Sky', 'Aventura'),
-            ('DOOM Eternal', 'Tiro'),
-            ('Cuphead', 'Plataforma'),
-            ('Hollow Knight', 'Plataforma'),
-            ('Ori and the Will of the Wisps', 'Plataforma'),
-            ('Mortal Kombat 11', 'Luta'),
-            ('Street Fighter V', 'Luta'),
-            ('Tekken 7', 'Luta'),
-            ('NBA 2K22', 'Simulação'),
-            ('PES 2021', 'Simulação'),
-            ('F1 2021', 'Corrida'),
-            ('Need for Speed Heat', 'Corrida'),
-            ('Forza Horizon 5', 'Corrida'),
-            ('Crash Bandicoot 4', 'Plataforma'),
-            ('Sonic Mania', 'Plataforma'),
-            ('Borderlands 3', 'Tiro'),
-            ('Far Cry 6', 'Tiro'),
-            ('Just Cause 4', 'Ação'),
-            ('Spider-Man: Miles Morales', 'Aventura'),
-            ('Control', 'Aventura'),
-            ('Halo Infinite', 'Tiro'),
-            ('Warframe', 'Ação'),
-            ('Splatoon 2', 'Tiro'),
-            ('Super Smash Bros. Ultimate', 'Luta'),
-            ('Street Fighter IV', 'Luta'),
-            ('Tekken 6', 'Luta'),
-            ('Mario Kart 8 Deluxe', 'Corrida'),
-            ('Crash Team Racing', 'Corrida'),
-            ('Gran Turismo Sport', 'Corrida'),
-            ('NFS Most Wanted', 'Corrida'),
-            ('Yakuza: Like a Dragon', 'Aventura'),
-            ('Dead by Daylight', 'Multiplayer'),
-            ('The Division 2', 'Multiplayer'),
-            ('Phasmophobia', 'Multiplayer'),
-            ('RimWorld', 'Simulação'),
-            ('SimCity', 'Simulação'),
-            ('Cities: Skylines', 'Simulação'),
-            ('Terraria', 'Sandbox'),
-            ('Starbound', 'Sandbox'),
-            ('Rust', 'Sandbox'),
-            ('ARK Survival Evolved', 'Sandbox'),
-            ('7 Days to Die', 'Sandbox'),
-            ('Portal 2', 'Plataforma'),
-            ('Celeste', 'Plataforma'),
-            ('Rayman Legends', 'Plataforma'),
-            ('Donkey Kong Country: Tropical Freeze', 'Plataforma'),
-            ('LittleBigPlanet 3', 'Plataforma'),
-            ('Shovel Knight', 'Plataforma'),
-            ('Brawlhalla', 'Luta'),
-            ('Guilty Gear Strive', 'Luta'),
-            ('Dragon Ball FighterZ', 'Luta'),
-            ('Dirt Rally 2.0', 'Corrida'),
-            ('Project CARS 2', 'Corrida'),
-            ('Wipeout Omega Collection', 'Corrida'),
-            ('TrackMania Turbo', 'Corrida'),
-            ('Mad Max', 'Ação'),
-            ('Watch Dogs: Legion', 'Ação'),
-            ('Tomb Raider', 'Aventura'),
-            ('Rise of the Tomb Raider', 'Aventura'),
-            ('Journey', 'Aventura'),
-            ('Shadow of the Colossus', 'Aventura');
+        INSERT INTO Jogo (Id_Jogo, Nome, Tipo) VALUES
+    (1, 'The Legend of Zelda', 'Aventura'),
+    (2, 'Super Mario Odyssey', 'Plataforma'),
+    (3, 'Fortnite', 'Tiro'),
+    (4, 'Call of Duty', 'Tiro'),
+    (5, 'FIFA 22', 'Simulação'),
+    (6, 'Red Dead Redemption 2', 'Aventura'),
+    (7, 'Minecraft', 'Sandbox'),
+    (8, 'Overwatch', 'Tiro'),
+    (9, 'Final Fantasy XV', 'Ação'),
+    (10, 'Assassins Creed Valhalla', 'Aventura'),
+    (11, 'League of Legends', 'Multiplayer'),
+    (12, 'Dota 2', 'Multiplayer'),
+    (13, 'Apex Legends', 'Tiro'),
+    (14, 'Cyberpunk 2077', 'Ação'),
+    (15, 'Hades', 'Ação'),
+    (16, 'Among Us', 'Multiplayer'),
+    (17, 'Fall Guys', 'Multiplayer'),
+    (18, 'Resident Evil Village', 'Aventura'),
+    (19, 'Horizon Zero Dawn', 'Aventura'),
+    (20, 'The Witcher 3 Wild Hunt', 'Aventura'),
+    (21, 'God of War', 'Ação'),
+    (22, 'Ghost of Tsushima', 'Ação'),
+    (23, 'Battlefield V', 'Tiro'),
+    (24, 'Valorant', 'Tiro'),
+    (25, 'Rocket League', 'Corrida'),
+    (26, 'Gran Turismo 7', 'Corrida'),
+    (27, 'The Sims 4', 'Simulação'),
+    (28, 'Animal Crossing: New Horizons', 'Simulação'),
+    (29, 'Stardew Valley', 'Simulação'),
+    (30, 'Persona 5', 'Aventura'),
+    (31, 'Dark Souls III', 'Ação'),
+    (32, 'Sekiro: Shadows Die Twice', 'Ação'),
+    (33, 'Monster Hunter: World', 'Ação'),
+    (34, 'Genshin Impact', 'Aventura'),
+    (35, 'PUBG', 'Tiro'),
+    (36, 'Hitman', 'Ação'),
+    (37, 'No Mans Sky', 'Aventura'),
+    (38, 'DOOM Eternal', 'Tiro'),
+    (39, 'Cuphead', 'Plataforma'),
+    (40, 'Hollow Knight', 'Plataforma'),
+    (41, 'Ori and the Will of the Wisps', 'Plataforma'),
+    (42, 'Mortal Kombat 11', 'Luta'),
+    (43, 'Street Fighter V', 'Luta'),
+    (44, 'Tekken 7', 'Luta'),
+    (45, 'NBA 2K22', 'Simulação'),
+    (46, 'PES 2021', 'Simulação'),
+    (47, 'F1 2021', 'Corrida'),
+    (48, 'Need for Speed Heat', 'Corrida'),
+    (49, 'Forza Horizon 5', 'Corrida'),
+    (50, 'Crash Bandicoot 4', 'Plataforma'),
+    (51, 'Sonic Mania', 'Plataforma'),
+    (52, 'Borderlands 3', 'Tiro'),
+    (53, 'Far Cry 6', 'Tiro'),
+    (54, 'Just Cause 4', 'Ação'),
+    (55, 'Spider-Man: Miles Morales', 'Aventura'),
+    (56, 'Control', 'Aventura'),
+    (57, 'Halo Infinite', 'Tiro'),
+    (58, 'Warframe', 'Ação'),
+    (59, 'Splatoon 2', 'Tiro'),
+    (60, 'Super Smash Bros. Ultimate', 'Luta'),
+    (61, 'Street Fighter IV', 'Luta'),
+    (62, 'Tekken 6', 'Luta'),
+    (63, 'Mario Kart 8 Deluxe', 'Corrida'),
+    (64, 'Crash Team Racing', 'Corrida'),
+    (65, 'Gran Turismo Sport', 'Corrida'),
+    (66, 'NFS Most Wanted', 'Corrida'),
+    (67, 'Yakuza: Like a Dragon', 'Aventura'),
+    (68, 'Dead by Daylight', 'Multiplayer'),
+    (69, 'The Division 2', 'Multiplayer'),
+    (70, 'Phasmophobia', 'Multiplayer'),
+    (71, 'RimWorld', 'Simulação'),
+    (72, 'SimCity', 'Simulação'),
+    (73, 'Cities: Skylines', 'Simulação'),
+    (74, 'Terraria', 'Sandbox'),
+    (75, 'Starbound', 'Sandbox'),
+    (76, 'Rust', 'Sandbox'),
+    (77, 'ARK Survival Evolved', 'Sandbox'),
+    (78, '7 Days to Die', 'Sandbox'),
+    (79, 'Portal 2', 'Plataforma'),
+    (80, 'Celeste', 'Plataforma'),
+    (81, 'Rayman Legends', 'Plataforma'),
+    (82, 'Donkey Kong Country: Tropical Freeze', 'Plataforma'),
+    (83, 'LittleBigPlanet 3', 'Plataforma'),
+    (84, 'Shovel Knight', 'Plataforma'),
+    (85, 'Brawlhalla', 'Luta'),
+    (86, 'Guilty Gear Strive', 'Luta'),
+    (87, 'Dragon Ball FighterZ', 'Luta'),
+    (88, 'Dirt Rally 2.0', 'Corrida'),
+    (89, 'Project CARS 2', 'Corrida'),
+    (90, 'Wipeout Omega Collection', 'Corrida'),
+    (91, 'TrackMania Turbo', 'Corrida'),
+    (92, 'Mad Max', 'Ação'),
+    (93, 'Watch Dogs: Legion', 'Ação'),
+    (94, 'Tomb Raider', 'Aventura'),
+    (95, 'Rise of the Tomb Raider', 'Aventura'),
+    (96, 'Journey', 'Aventura'),
+    (97, 'Shadow of the Colossus', 'Aventura');
         """.trimIndent()
 
         db.execSQL(popularTabelaJogo)
@@ -183,28 +183,22 @@ override fun onCreate(db: SQLiteDatabase) {
         return loginValido
     }
 
-    @SuppressLint("SuspiciousIndentation")
     fun obterJogos(): List<Jogo> {
-    val listaJogos = mutableListOf<Jogo>()
-    val db = this.readableDatabase
-    val query = "SELECT * FROM Jogo order by tipo"
-    val cursor = db.rawQuery(query, null)
+        val db = this.readableDatabase
+        val query = "SELECT Id_Jogo, Nome, Tipo FROM Jogo"
+        val cursor = db.rawQuery(query, null)
+        val jogos = mutableListOf<Jogo>()
 
         if (cursor.moveToFirst()) {
             do {
                 val idJogo = cursor.getInt(cursor.getColumnIndexOrThrow("Id_Jogo"))
                 val nome = cursor.getString(cursor.getColumnIndexOrThrow("Nome"))
                 val tipo = cursor.getString(cursor.getColumnIndexOrThrow("Tipo"))
-
-                val jogo = Jogo(idJogo, nome, tipo)
-                listaJogos.add(jogo)
+                jogos.add(Jogo(idJogo, nome, tipo))
             } while (cursor.moveToNext())
         }
-
         cursor.close()
-        db.close()
-
-        return listaJogos
+        return jogos
     }
 
     fun obterUsuarios(): Cursor {
@@ -238,9 +232,18 @@ override fun onCreate(db: SQLiteDatabase) {
     }
 
     fun obterFavoritos(userId: Int): Cursor {
-    val db = this.readableDatabase
-    val query = "SELECT Jogo.Nome, Jogo.Tipo FROM Favorita INNER JOIN Jogo ON Favorita.fk_Jogo_Id_Jogo = Jogo.Id_Jogo WHERE Favorita.fk_User_Id_User = ?"
-    return db.rawQuery(query, arrayOf(userId.toString()))
-}
+        val db = this.readableDatabase
+        val query = "SELECT Jogo.Nome, Jogo.Tipo FROM Favorita INNER JOIN Jogo ON Favorita.fk_Jogo_Id_Jogo = Jogo.Id_Jogo WHERE Favorita.fk_User_Id_User = ?"
+        return db.rawQuery(query, arrayOf(userId.toString()))
+    }
+
+    fun adicionarFavorito(userId: Int, jogoId: Int): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put("fk_User_Id_User", userId)
+            put("fk_Jogo_Id_Jogo", jogoId)
+        }
+        return db.insert("Favorita", null, values)
+    }
 
 }
