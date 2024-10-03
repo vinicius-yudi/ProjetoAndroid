@@ -1,5 +1,6 @@
 package com.yudi.projetoandroid
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -13,11 +14,12 @@ class MeuBancoDeDados(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, 
         private const val VERSION = 1
     }
 
+@SuppressLint("SuspiciousIndentation")
 override fun onCreate(db: SQLiteDatabase) {
     val sqlUser = """
     -- Criação da tabela User
     CREATE TABLE User (
-        Id_User INTEGER PRIMARY KEY,
+        Id_User INTEGER PRIMARY KEY autoincrement,
         Nome VARCHAR(255),
         Email VARCHAR(255) UNIQUE,
         Senha VARCHAR(255),
@@ -28,31 +30,29 @@ override fun onCreate(db: SQLiteDatabase) {
 
     val sqlJogo = """
     CREATE TABLE Jogo (
-        Id_Jogo INTEGER PRIMARY KEY,
+        Id_Jogo INTEGER PRIMARY KEY autoincrement,
         Nome VARCHAR(255) NOT NULL,
         Tipo VARCHAR(255) NOT NULL
     );
     """.trimIndent()
 
     val sqlFavorita = """
-        CREATE TABLE Favorita (
-            fk_User_Id_User INTEGER,
-            fk_Jogo_Id_Jogo INTEGER,
-            FOREIGN KEY (fk_User_Id_User) REFERENCES User (Id_User) ON DELETE RESTRICT,
-            FOREIGN KEY (fk_Jogo_Id_Jogo) REFERENCES Jogo (Id_Jogo) ON DELETE SET NULL
-        );
+    CREATE TABLE Favorita (
+        Id_Favorita INTEGER PRIMARY KEY,
+        fk_User_Id_User INTEGER,
+        fk_Jogo_Id_Jogo INTEGER,
+        FOREIGN KEY (fk_User_Id_User) REFERENCES User (Id_User) ON DELETE RESTRICT,
+        FOREIGN KEY (fk_Jogo_Id_Jogo) REFERENCES Jogo (Id_Jogo) ON DELETE SET NULL
+    );
 
     """.trimIndent()
-
-
 
     db.execSQL(sqlUser)
     db.execSQL(sqlJogo)
     db.execSQL(sqlFavorita)
 
-
-        val popularTabelaJogo = """
-            INSERT INTO Jogo (Nome, Tipo) VALUES
+    val popularTabelaJogo = """
+        INSERT INTO Jogo (Nome, Tipo) VALUES
             ('The Legend of Zelda', 'Aventura'),
             ('Super Mario Odyssey', 'Plataforma'),
             ('Fortnite', 'Tiro'),
@@ -183,26 +183,64 @@ override fun onCreate(db: SQLiteDatabase) {
         return loginValido
     }
 
+    @SuppressLint("SuspiciousIndentation")
     fun obterJogos(): List<Jogo> {
     val listaJogos = mutableListOf<Jogo>()
     val db = this.readableDatabase
     val query = "SELECT * FROM Jogo order by tipo"
     val cursor = db.rawQuery(query, null)
 
-    if (cursor.moveToFirst()) {
-        do {
-            val idJogo = cursor.getInt(cursor.getColumnIndexOrThrow("Id_Jogo"))
-            val nome = cursor.getString(cursor.getColumnIndexOrThrow("Nome"))
-            val tipo = cursor.getString(cursor.getColumnIndexOrThrow("Tipo"))
+        if (cursor.moveToFirst()) {
+            do {
+                val idJogo = cursor.getInt(cursor.getColumnIndexOrThrow("Id_Jogo"))
+                val nome = cursor.getString(cursor.getColumnIndexOrThrow("Nome"))
+                val tipo = cursor.getString(cursor.getColumnIndexOrThrow("Tipo"))
 
-            val jogo = Jogo(idJogo, nome, tipo)
-            listaJogos.add(jogo)
-        } while (cursor.moveToNext())
+                val jogo = Jogo(idJogo, nome, tipo)
+                listaJogos.add(jogo)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return listaJogos
     }
 
-    cursor.close()
-    db.close()
-    return listaJogos
+    fun obterUsuarios(): Cursor {
+        val db = this.readableDatabase
+        val query = "SELECT id, email FROM Usuario"
+        return db.rawQuery(query, null)
+    }
+
+    fun obterUserIdPeloLogin(email: String): Int? {
+        val db = this.readableDatabase
+        val query = "SELECT id FROM User WHERE User.email = ?"
+        val cursor: Cursor = db.rawQuery(query, arrayOf(email))
+        return if (cursor.moveToFirst()) {
+            val userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            cursor.close()
+            userId
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+
+    fun inserirFavorito(userId: Int, gameId: Int): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put("user_id", userId)
+            put("game_id", gameId)
+        }
+        return db.insert("Favorito", null, values)
+    }
+
+    fun obterFavoritos(userId: Int): Cursor {
+    val db = this.readableDatabase
+    val query = "SELECT Jogo.Nome, Jogo.Tipo FROM Favorita INNER JOIN Jogo ON Favorita.fk_Jogo_Id_Jogo = Jogo.Id_Jogo WHERE Favorita.fk_User_Id_User = ?"
+    return db.rawQuery(query, arrayOf(userId.toString()))
 }
 
 }

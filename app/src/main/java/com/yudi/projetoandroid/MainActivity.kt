@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -29,13 +27,12 @@ class MainActivity : AppCompatActivity() {
         window.statusBarColor = Color.parseColor("#FFFFFF")
 
         binding.txtTelaCadastro.setOnClickListener {
-            val  intent = Intent(this,TelaCadastro::class.java )
+            val intent = Intent(this, TelaCadastro::class.java)
             startActivity(intent)
         }
 
         // Lógica para o botão Entrar
         binding.btnEntrar.setOnClickListener {
-
             val email = binding.editEmail.text.toString()
             val senha = binding.editSenha.text.toString()
 
@@ -63,6 +60,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun usuarios(){
+        val bancoDeDados = MeuBancoDeDados(this)
+        val cursor = bancoDeDados.obterUsuarios()
+        val listaUsuarios = StringBuilder()
+        while (cursor.moveToNext()) {
+            val userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            val userEmail = cursor.getString(cursor.getColumnIndexOrThrow("email"))
+            listaUsuarios.append("ID: $userId, Email: $userEmail\n")
+        }
+        cursor.close()
+        binding.txtListaUsuarios.text = listaUsuarios.toString()
+    }
+
     private fun login(view: View) {
         val email = binding.editEmail.text.toString()
         val senha = binding.editSenha.text.toString()
@@ -86,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 val loginValido = bancoDeDados.verificarLogin(email, senha)
 
                 if (loginValido) {
-                    navegarTelaPrincipal()
+                    navegarTelaPrincipal(email)
                     val snackbar = Snackbar.make(view, "Login realizado com sucesso!", Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 } else {
@@ -98,8 +108,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun navegarTelaPrincipal() {
+    private fun navegarTelaPrincipal(email: String) {
         val intent = Intent(this, TelaPrincipal::class.java)
+        intent.putExtra("USER_EMAIL", email)
         startActivity(intent)
     }
 }

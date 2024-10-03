@@ -11,6 +11,8 @@
     <string name="txt_tela_cadastro">Clique aqui para se Cadastrar!</string>
     <string name="txt_JaTenhoCadastro">Ja possuo cadastro!</string>
     <string name="nome_do_jogo">Nome do Jogo</string>
+    <string name="voltar_para_lista">Voltar para lista</string>
+    <string name="sem_favoritos">Sem Favoritos</string>
 
     <string-array name="game_genres">
         <item>Aventura</item>

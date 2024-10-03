@@ -1,10 +1,8 @@
 package com.yudi.projetoandroid
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -13,7 +11,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class TelaPrincipal : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
+    private var userId: Int = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,21 +31,26 @@ class TelaPrincipal : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Chama a função para mostrar usuários na tela
-        mostrarUsuarios()
+        findViewById<Button>(R.id.btnFavoritos).setOnClickListener {
+            val intent = Intent(this, Favoritos::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent)
+        }
+
+        mostrarJogos()
     }
 
-    private fun mostrarUsuarios() {
+    private fun mostrarJogos() {
         val db = MeuBancoDeDados(this)
-        val usuarios = db.obterJogos()
+        val jogos = db.obterJogos()
 
-        val usuariosTextView: TextView = findViewById(R.id.usuariosTextView) // Certifique-se de ter esse TextView no layout
+        val jogosTextView: TextView = findViewById(R.id.jogosTextView)
         val sb = StringBuilder()
 
-        for (jogo in usuarios) {
+        for (jogo in jogos) {
             sb.append("Nome: ${jogo.nome}, Tipo: ${jogo.tipo}\n")
         }
 
-        usuariosTextView.text = sb.toString()
+        jogosTextView.text = sb.toString()
     }
 }

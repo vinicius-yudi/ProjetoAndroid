@@ -1,10 +1,7 @@
 package com.yudi.projetoandroid
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -64,13 +61,13 @@ class TelaCadastro : AppCompatActivity() {
                     snackbar.show()
                 }
                 else -> {
-                    Cadastrar(it, email, senha, cpf, telefone)
+                    cadastrar(it, email, senha, cpf, telefone)
                 }
             }
         }
     }
 
-    private fun Cadastrar(view: View, email: String, senha: String, cpf: String, telefone: String) {
+    private fun cadastrar(view: View, email: String, senha: String, cpf: String, telefone: String) {
         val resultado = bancoDeDados.inserirUsuario(email, email, senha, cpf, telefone)
 
         if (resultado != -1L) {
