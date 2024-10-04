@@ -11,7 +11,7 @@
       android:id="@+id/main"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:background="@color/purple_700"
+      android:background="@color/cinza"
       tools:context=".TelaCadastro">
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/txt_JaTenhoCadastro"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         android:paddingTop="20dp"

@@ -12,7 +12,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/purple_700"
+    android:background="@color/cinza"
     tools:context=".MainActivity">
 
     <View
@@ -27,7 +27,7 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/logomobile"
         app:layout_constraintTop_toTopOf="@id/containerTop"
         app:layout_constraintStart_toStartOf="@id/containerTop"
         app:layout_constraintEnd_toEndOf="@id/containerTop"
@@ -124,7 +124,7 @@
         android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="@string/txt_tela_cadastro"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

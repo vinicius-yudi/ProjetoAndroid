@@ -6,7 +6,7 @@
     android:background="@drawable/rounded_background"
     android:padding="16dp"
     android:layout_marginBottom="16dp"
-    android:backgroundTint="@color/purple_200">
+    android:backgroundTint="@color/cinza">
 
     <TextView
         android:id="@+id/tvGameName"
@@ -32,7 +32,7 @@
         android:text="Favoritar"
         android:layout_marginTop="8dp"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/purple_700"
+        android:backgroundTint="@color/azul"
         />
     <Button
         android:id="@+id/btnRemoveFavorite"
@@ -41,6 +41,6 @@
         android:text="Remover"
         android:layout_marginTop="8dp"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/purple_700" />
+        android:backgroundTint="@color/azul" />
 
 </LinearLayout>

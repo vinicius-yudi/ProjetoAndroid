@@ -66,7 +66,7 @@ class TelaPrincipal : AppCompatActivity() {
             }
 
             val gameNameTextView = TextView(this).apply {
-                text = "Nome: ${jogo.nome}"
+                text = "${jogo.nome}"
                 textSize = 18f
                 setTextColor(Color.BLACK)
                 layoutParams = LinearLayout.LayoutParams(
@@ -78,7 +78,7 @@ class TelaPrincipal : AppCompatActivity() {
             }
 
             val gameTypeTextView = TextView(this).apply {
-                text = "Tipo: ${jogo.tipo}"
+                text = "${jogo.tipo}"
                 textSize = 14f
                 setTextColor(Color.BLACK)
                 layoutParams = LinearLayout.LayoutParams(

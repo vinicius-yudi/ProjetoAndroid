@@ -6,5 +6,9 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="red">#FF0000</color>
+    <color name="azul">#110F39</color>
+    <color name="cinza">#CCCCCC</color>
+    <color name="cinza_escuro">#333333</color>
+
 
 </resources>
