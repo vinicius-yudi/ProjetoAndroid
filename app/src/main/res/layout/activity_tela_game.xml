@@ -11,7 +11,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_cyan_green"
+        android:background="@color/purple_700"
         tools:context=".TelaCadastro">
 
 
@@ -37,7 +37,7 @@
             android:layout_width="373dp"
             android:layout_height="65dp"
             android:layout_marginTop="12dp"
-            app:boxStrokeColor="@color/dark_cyan_green"
+            app:boxStrokeColor="@color/purple_200"
             app:errorEnabled="true"
             app:errorTextColor="@color/red"
             app:hintAnimationEnabled="true"
@@ -87,7 +87,7 @@
             android:layout_width="373dp"
             android:layout_height="65dp"
             android:layout_marginTop="184dp"
-            app:boxStrokeColor="@color/dark_cyan_green"
+            app:boxStrokeColor="@color/purple_200"
             app:errorEnabled="true"
             app:errorTextColor="@color/red"
             app:hintAnimationEnabled="true"

@@ -427,7 +427,7 @@ override fun onCreate(db: SQLiteDatabase) {
 
     fun obterJogos(): List<Jogo> {
         val db = this.readableDatabase
-        val query = "SELECT Id_Jogo, Nome, Tipo FROM Jogo where Jogo.nome = 'aaaaa' order by tipo, nome"
+        val query = "SELECT Id_Jogo, Nome, Tipo FROM Jogo order by tipo, nome"
         val cursor = db.rawQuery(query, null)
         val jogos = mutableListOf<Jogo>()
 

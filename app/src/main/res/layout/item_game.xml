@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:background="@drawable/rounded_background"
     android:padding="16dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="16dp"
+    android:backgroundTint="@color/purple_200">
 
     <TextView
         android:id="@+id/tvGameName"
@@ -30,13 +31,16 @@
         android:layout_height="wrap_content"
         android:text="Favoritar"
         android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/purple_700"
+        />
     <Button
         android:id="@+id/btnRemoveFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remover"
         android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/purple_700" />
 
 </LinearLayout>
