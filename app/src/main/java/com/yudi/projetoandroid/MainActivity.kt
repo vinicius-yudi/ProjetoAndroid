@@ -6,23 +6,42 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.yudi.projetoandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var isDark = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        val mainLayout = findViewById<ConstraintLayout>(R.id.main)
+        val toggleButton = findViewById<Button>(R.id.btn_toggle_color)
+        val textView = findViewById<TextView>(R.id.txtTelaCadastro)
+
+        toggleButton.setOnClickListener {
+            if (isDark) {
+                mainLayout.setBackgroundColor(Color.WHITE)
+                textView.setTextColor(Color.BLACK)
+            } else {
+                mainLayout.setBackgroundColor(Color.BLACK)
+                textView.setTextColor(Color.WHITE)
+            }
+            isDark = !isDark
+        }
 
         window.statusBarColor = Color.parseColor("#FFFFFF")
 

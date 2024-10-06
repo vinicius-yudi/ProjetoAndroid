@@ -11,25 +11,39 @@
       android:id="@+id/main"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:background="@color/cinza"
+      android:background="@color/white"
       tools:context=".TelaCadastro">
+
+
+    <Button
+        android:id="@+id/btn_toggle_color"
+        android:layout_width="99dp"
+        android:layout_height="67dp"
+        android:background="@android:color/transparent"
+        android:text="💡"
+        android:textSize="24.dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
         android:id="@+id/txtJaCadastrei"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="84dp"
         android:gravity="center"
+        android:paddingTop="20dp"
         android:text="@string/txt_JaTenhoCadastro"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:paddingTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btSalvar" />
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btSalvar"

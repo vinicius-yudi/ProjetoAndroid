@@ -1,9 +1,13 @@
 package com.yudi.projetoandroid
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 import com.yudi.projetoandroid.databinding.ActivityTelaCadastroBinding
 
@@ -11,11 +15,27 @@ class TelaCadastro : AppCompatActivity() {
 
     private lateinit var voltar: ActivityTelaCadastroBinding
     private lateinit var bancoDeDados: MeuBancoDeDados
+    private var isDark = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         voltar = ActivityTelaCadastroBinding.inflate(layoutInflater)
         setContentView(voltar.root)
+
+        val mainLayout = findViewById<ConstraintLayout>(R.id.main)
+        val toggleButton = findViewById<Button>(R.id.btn_toggle_color)
+        val textView = findViewById<TextView>(R.id.txtJaCadastrei)
+
+        toggleButton.setOnClickListener {
+            if (isDark) {
+                mainLayout.setBackgroundColor(Color.WHITE)
+                textView.setTextColor(Color.BLACK)
+            } else {
+                mainLayout.setBackgroundColor(Color.BLACK)
+                textView.setTextColor(Color.WHITE)
+            }
+            isDark = !isDark
+        }
 
         // Instanciar o banco de dados
         bancoDeDados = MeuBancoDeDados(this)
