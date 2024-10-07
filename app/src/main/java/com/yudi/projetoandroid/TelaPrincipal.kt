@@ -13,6 +13,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 
 class TelaPrincipal : AppCompatActivity() {
@@ -50,77 +52,42 @@ class TelaPrincipal : AppCompatActivity() {
         val db = MeuBancoDeDados(this)
         val jogos = db.obterJogos()
 
-        val jogosTextView: LinearLayout = findViewById(R.id.jogosTextView)
-        jogosTextView.removeAllViews()
+        val jogosPorTipo = jogos.groupBy { it.tipo }
 
-        for (jogo in jogos) {
-            val jogoLayout = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
+        val tiposDeJogosLayout: LinearLayout = findViewById(R.id.tiposDeJogosLayout)
+        tiposDeJogosLayout.removeAllViews()
+
+        for ((tipo, jogosDoTipo) in jogosPorTipo) {
+            val tipoTextView = TextView(this).apply {
+                text = tipo
+                textSize = 20f
+                setTextColor(Color.WHITE)
+                setPadding(16, 16, 16, 16)
+            }
+            tiposDeJogosLayout.addView(tipoTextView)
+
+            val recyclerView = RecyclerView(this).apply {
+                layoutManager = LinearLayoutManager(this@TelaPrincipal, LinearLayoutManager.HORIZONTAL, false)
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
                     setMargins(0, 0, 0, 16)
                 }
-                setBackgroundResource(R.drawable.rounded_background)
-                setPadding(16, 16, 16, 16)
             }
 
-            val gameNameTextView = TextView(this).apply {
-                text = "${jogo.nome}"
-                textSize = 18f
-                setTextColor(Color.BLACK)
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    gravity = Gravity.CENTER_HORIZONTAL
+            val adapter = CarouselAdapter(jogosDoTipo) { jogo ->
+                val result = db.adicionarFavorito(userId, jogo.idJogo)
+                if (result != -1L) {
+                    Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo favoritado com sucesso!", Snackbar.LENGTH_SHORT).show()
+                } else {
+                    Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo já favoritado!!", Snackbar.LENGTH_SHORT).show()
                 }
             }
+            recyclerView.adapter = adapter
 
-            val gameTypeTextView = TextView(this).apply {
-                text = "${jogo.tipo}"
-                textSize = 14f
-                setTextColor(Color.BLACK)
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    gravity = Gravity.CENTER_HORIZONTAL
-                    topMargin = 8
-                }
-            }
-
-            val favoriteButton = Button(this).apply {
-                text = "Favoritar"
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    gravity = Gravity.CENTER_HORIZONTAL
-                    topMargin = 8
-                }
-                setOnClickListener {
-                    val result = db.adicionarFavorito(userId, jogo.idJogo)
-                    if (result != -1L) {
-                        val fadeOut = AnimationUtils.loadAnimation(this@TelaPrincipal, R.anim.fade_out)
-                        val fadeIn = AnimationUtils.loadAnimation(this@TelaPrincipal, R.anim.fade_in)
-                        jogoLayout.startAnimation(fadeOut)
-                        jogoLayout.postDelayed({
-                            jogoLayout.startAnimation(fadeIn)
-                        }, fadeOut.duration)
-                        Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo favoritado com sucesso!", Snackbar.LENGTH_SHORT).show()
-                    } else {
-                        Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo já favoritado!!", Snackbar.LENGTH_SHORT).show()
-                    }
-                }
-            }
-
-            jogoLayout.addView(gameNameTextView)
-            jogoLayout.addView(gameTypeTextView)
-            jogoLayout.addView(favoriteButton)
-
-            jogosTextView.addView(jogoLayout)
+            tiposDeJogosLayout.addView(recyclerView)
         }
     }
+
 }
