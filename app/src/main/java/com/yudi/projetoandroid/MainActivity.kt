@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         toggleButton.setOnClickListener {
             if (isDark) {
-                mainLayout.setBackgroundColor(Color.WHITE)
+                mainLayout.setBackgroundColor(Color.parseColor("#CCCCCC"))
                 textView.setTextColor(Color.BLACK)
             } else {
                 mainLayout.setBackgroundColor(Color.BLACK)
