@@ -489,12 +489,19 @@ override fun onCreate(db: SQLiteDatabase) {
     }
 
     fun adicionarFavorito(userId: Int, jogoId: Int): Long {
-        val db = this.writableDatabase
-        val values = ContentValues().apply {
-            put("fk_User_Id_User", userId)
-            put("fk_Jogo_Id_Jogo", jogoId)
+        val bd = this.readableDatabase
+        val query = "SELECT * FROM Favorita WHERE fk_User_Id_User = ? AND fk_Jogo_Id_Jogo = ?"
+        val cursor = bd.rawQuery(query, arrayOf(userId.toString(), jogoId.toString()))
+        if (cursor.count == 0) {
+            val db = this.writableDatabase
+            val values = ContentValues().apply {
+                put("fk_User_Id_User", userId)
+                put("fk_Jogo_Id_Jogo", jogoId)
+            }
+            return db.insert("Favorita", null, values)
+        } else {
+            return -1
         }
-        return db.insert("Favorita", null, values)
     }
 
     fun removerFavorito(userId: Int, jogoId: Int): Int {
