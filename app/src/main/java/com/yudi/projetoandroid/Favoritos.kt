@@ -1,5 +1,6 @@
 package com.yudi.projetoandroid
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class Favoritos : AppCompatActivity() {
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favoritos)
@@ -31,6 +33,11 @@ class Favoritos : AppCompatActivity() {
             rvFavoritos.layoutManager = GridLayoutManager(this, 2) // 2 colunas
             val adapter = GameAdapter(cursor, this, userId)
             rvFavoritos.adapter = adapter
+        }
+
+        findViewById<Button>(R.id.btnBackToMain).setOnClickListener {
+            val intent = Intent(this, TelaPrincipal::class.java)
+            startActivity(intent)
         }
 
         btnBackToGames.setOnClickListener {

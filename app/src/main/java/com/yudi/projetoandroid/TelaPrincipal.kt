@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -102,9 +103,15 @@ class TelaPrincipal : AppCompatActivity() {
                 setOnClickListener {
                     val result = db.adicionarFavorito(userId, jogo.idJogo)
                     if (result != -1L) {
+                        val fadeOut = AnimationUtils.loadAnimation(this@TelaPrincipal, R.anim.fade_out)
+                        val fadeIn = AnimationUtils.loadAnimation(this@TelaPrincipal, R.anim.fade_in)
+                        jogoLayout.startAnimation(fadeOut)
+                        jogoLayout.postDelayed({
+                            jogoLayout.startAnimation(fadeIn)
+                        }, fadeOut.duration)
                         Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo favoritado com sucesso!", Snackbar.LENGTH_SHORT).show()
                     } else {
-                        Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Erro ao favoritar o jogo!", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo já favoritado!!", Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }

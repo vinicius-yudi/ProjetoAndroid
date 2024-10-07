@@ -41,8 +41,10 @@ class GameAdapter(private var cursor: Cursor, private val context: Context, priv
         private val nomeTextView: TextView = itemView.findViewById(R.id.tvGameName)
         private val tipoTextView: TextView = itemView.findViewById(R.id.tvGameType)
         private val removeButton: Button = itemView.findViewById(R.id.btnRemoveFavorite)
+        private val favoriteButton: Button = itemView.findViewById(R.id.btnFavorite)
 
         fun bind(jogoId: Int, nome: String, tipo: String) {
+            favoriteButton.visibility = View.GONE
             nomeTextView.text = nome
             tipoTextView.text = tipo
 
