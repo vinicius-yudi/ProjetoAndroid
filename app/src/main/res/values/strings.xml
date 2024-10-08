@@ -13,6 +13,7 @@
     <string name="nome_do_jogo">Nome do Jogo</string>
     <string name="voltar_para_lista">Voltar para lista</string>
     <string name="sem_favoritos">Sem Favoritos</string>
+    <string name="voltar">Voltar</string>
 
     <string-array name="game_genres">
         <item>Aventura</item>
@@ -23,6 +24,7 @@
         <item>Ação</item>
         <item>Sandbox</item>
         <item>Multiplayer</item>
+        <item>Estratégia</item>
         <item>Plataforma</item>
     </string-array>
 

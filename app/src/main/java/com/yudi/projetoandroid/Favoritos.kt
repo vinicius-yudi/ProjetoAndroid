@@ -24,9 +24,11 @@ class Favoritos : AppCompatActivity() {
         val rvFavoritos: RecyclerView = findViewById(R.id.rvFavoritos)
         val tvNoFavorites: TextView = findViewById(R.id.tvNoFavorites)
         val btnBackToGames: Button = findViewById(R.id.btnBackToGames)
+        val backToMain: Button = findViewById(R.id.btnBackToMain)
 
         if (cursor.count == 0) {
             rvFavoritos.visibility = View.GONE
+            backToMain.visibility = View.GONE
             tvNoFavorites.visibility = View.VISIBLE
             btnBackToGames.visibility = View.VISIBLE
         } else {
