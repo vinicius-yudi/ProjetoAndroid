@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 mainLayout.setBackgroundColor(Color.parseColor("#CCCCCC"))
                 textView.setTextColor(Color.BLACK)
             } else {
-                mainLayout.setBackgroundColor(Color.BLACK)
+                mainLayout.setBackgroundColor(Color.parseColor("#252530"))
                 textView.setTextColor(Color.WHITE)
             }
             isDark = !isDark
