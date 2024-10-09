@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 
 class TelaGame : AppCompatActivity() {
 
@@ -37,9 +38,14 @@ class TelaGame : AppCompatActivity() {
         spinner = findViewById(R.id.spinnerTelefone)
 
         findViewById<Button>(R.id.btnSalvar).setOnClickListener {
-            val nome = findViewById<Button>(R.id.btnSalvar).text.toString()
+            val nome = findViewById<TextInputEditText>(R.id.editJogo).text.toString()
             val selectedItem = spinner.selectedItem.toString()
             cria(it, nome, selectedItem)
+        }
+
+        findViewById<Button>(R.id.btnBackToMain).setOnClickListener {
+            val intent = Intent(this, TelaPrincipal::class.java)
+            startActivity(intent)
         }
     }
 

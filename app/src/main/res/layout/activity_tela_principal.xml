@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="Ir para Jogos"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/purple_700"/>
+            android:backgroundTint="@color/purple_700" />
 
         <Button
             android:id="@+id/btnFavoritos"
@@ -29,33 +29,13 @@
             android:backgroundTint="@color/purple_700"
             android:layout_marginTop="20dp" />
 
+        <!-- LinearLayout onde os RecyclerViews por tipo serão adicionados dinamicamente -->
         <LinearLayout
-            android:id="@+id/jogosTextView"
-            android:layout_width="300dp"
+            android:id="@+id/tiposDeJogosLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:backgroundTint="@color/cinza">
-
-            <TextView
-                android:id="@+id/tvGameName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tvGameType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:textColor="@android:color/black"
-                android:textSize="14sp" />
-
-        </LinearLayout>
+            android:padding="10dp" />
 
     </LinearLayout>
 </ScrollView>

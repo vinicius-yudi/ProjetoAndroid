@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/sem_favoritos"
         android:visibility="gone"
+        android:textColor="@color/white"
         android:layout_gravity="center"
         android:padding="16dp" />
 
