@@ -76,14 +76,7 @@ class TelaPrincipal : AppCompatActivity() {
                 }
             }
 
-            val adapter = CarouselAdapter(jogosDoTipo) { jogo ->
-                val result = db.adicionarFavorito(userId, jogo.idJogo)
-                if (result != -1L) {
-                    Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo favoritado com sucesso!", Snackbar.LENGTH_SHORT).show()
-                } else {
-                    Snackbar.make(this@TelaPrincipal.findViewById(android.R.id.content), "Jogo já favoritado!!", Snackbar.LENGTH_SHORT).show()
-                }
-            }
+            val adapter = CarouselAdapter(jogosDoTipo)
             recyclerView.adapter = adapter
 
             tiposDeJogosLayout.addView(recyclerView)

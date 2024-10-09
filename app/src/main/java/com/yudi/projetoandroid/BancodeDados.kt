@@ -480,6 +480,12 @@ override fun onCreate(db: SQLiteDatabase) {
         return db.rawQuery(query, arrayOf(userId.toString()))
     }
 
+    fun obterFav(userId: Int): Cursor {
+        val db = this.readableDatabase
+        val query = "SELECT Jogo.Nome FROM Favorita INNER JOIN Jogo ON Favorita.fk_Jogo_Id_Jogo = Jogo.Id_Jogo WHERE Favorita.fk_User_Id_User = ?"
+        return db.rawQuery(query, arrayOf(userId.toString()))
+    }
+
     fun inserirJogo(nome_Jogo: String?, tipo: String?): Long{
         val db = this.writableDatabase
         val jooj = ContentValues()
