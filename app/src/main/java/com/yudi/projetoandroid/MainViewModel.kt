@@ -37,7 +37,7 @@ class MainViewModel : ViewModel() {
                 } else {
                     _loginResult.value = LoginResult(success = false, error = "Login ou senha incorretos")
                 }
-                _loading.value = false
+
             }
         }
     }

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         val mainLayout = findViewById<ConstraintLayout>(R.id.main)
         val toggleButton = findViewById<Button>(R.id.btn_toggle_color)
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 if (loginResult.success) {
                     // Login bem-sucedido, redirecionar ou exibir mensagem de sucesso
                     Snackbar.make(binding.root, "Login bem-sucedido!", Snackbar.LENGTH_SHORT).show()
-                    // Exemplo: startActivity(Intent(this, TelaPrincipal::class.java))
+                    startActivity(Intent(this, TelaPrincipal::class.java))
                 } else {
                     // Exibe mensagem de erro
                     Snackbar.make(binding.root, loginResult.error ?: "Erro desconhecido", Snackbar.LENGTH_SHORT).show()
