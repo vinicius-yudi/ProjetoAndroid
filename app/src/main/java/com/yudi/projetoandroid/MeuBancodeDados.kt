@@ -9,14 +9,16 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class MeuBancoDeDados(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, null, VERSION) {
 
+    private lateinit var db: SQLiteDatabase
+
     companion object {
         private const val NOME_BANCO = "androidapp.db"
         private const val VERSION = 1
     }
 
-@SuppressLint("SuspiciousIndentation")
-override fun onCreate(db: SQLiteDatabase) {
-    val sqlUser = """
+    @SuppressLint("SuspiciousIndentation")
+    override fun onCreate(db: SQLiteDatabase) {
+        val sqlUser = """
     -- Criação da tabela User
     CREATE TABLE User (
         Id_User INTEGER PRIMARY KEY autoincrement,
@@ -28,7 +30,7 @@ override fun onCreate(db: SQLiteDatabase) {
     );
     """.trimIndent()
 
-    val sqlJogo = """
+        val sqlJogo = """
     CREATE TABLE Jogo (
         Id_Jogo INTEGER PRIMARY KEY autoincrement,
         Nome VARCHAR(255) NOT NULL,
@@ -36,7 +38,7 @@ override fun onCreate(db: SQLiteDatabase) {
     );
     """.trimIndent()
 
-    val sqlFavorita = """
+        val sqlFavorita = """
     CREATE TABLE Favorita (
         Id_Favorita INTEGER PRIMARY KEY,
         fk_User_Id_User INTEGER,
@@ -47,11 +49,11 @@ override fun onCreate(db: SQLiteDatabase) {
 
     """.trimIndent()
 
-    db.execSQL(sqlUser)
-    db.execSQL(sqlJogo)
-    db.execSQL(sqlFavorita)
+        db.execSQL(sqlUser)
+        db.execSQL(sqlJogo)
+        db.execSQL(sqlFavorita)
 
-    val popularTabelaJogo = """
+        val popularTabelaJogo = """
         INSERT INTO Jogo (Id_Jogo, Nome, Tipo) VALUES
     (1, 'A Little to the Left', 'Aventura'),
 (2, 'A Plague Tale: Requiem', 'Ação'),
@@ -486,10 +488,10 @@ override fun onCreate(db: SQLiteDatabase) {
         return db.rawQuery(query, arrayOf(userId.toString()))
     }
 
-    fun inserirJogo(nome_Jogo: String?, tipo: String?): Long{
+    fun inserirJogo(nome: String?, tipo: String?): Long{
         val db = this.writableDatabase
         val jooj = ContentValues()
-        jooj.put("Nome", nome_Jogo)
+        jooj.put("Nome", nome)
         jooj.put("Tipo", tipo)
         return db.insert("Jogo", null, jooj)
     }

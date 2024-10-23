@@ -22,6 +22,7 @@ class TelaCadastro : AppCompatActivity() {
         voltar = ActivityTelaCadastroBinding.inflate(layoutInflater)
         setContentView(voltar.root)
 
+
         val mainLayout = findViewById<ConstraintLayout>(R.id.main)
         val toggleButton = findViewById<Button>(R.id.btn_toggle_color)
         val textView = findViewById<TextView>(R.id.txtJaCadastrei)
@@ -90,7 +91,7 @@ class TelaCadastro : AppCompatActivity() {
     private fun cadastrar(view: View, email: String, senha: String, cpf: String, telefone: String) {
         val resultado = bancoDeDados.inserirUsuario(email, email, senha, cpf, telefone)
 
-        if (resultado != -1L) {
+        if (resultado == -1L) {
             // Cadastro com sucesso
             val snackbar = Snackbar.make(view, "Cadastro realizado com sucesso!", Snackbar.LENGTH_SHORT)
             snackbar.show()
