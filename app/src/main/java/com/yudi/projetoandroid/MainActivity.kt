@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        val bd = MeuBancoDeDados(this)
+
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         val mainLayout = findViewById<ConstraintLayout>(R.id.main)
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.isDark.observe(this) { isDark ->
-            if (!isDestroyed && !isFinishing) {  // Verifica o estado da Activity antes de atualizar a UI
+            if (!isDestroyed && !isFinishing) {
                 if (isDark) {
                     mainLayout.setBackgroundColor(Color.parseColor("#252530"))
                     textView.setTextColor(Color.WHITE)
@@ -53,40 +55,29 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = Color.parseColor("#FFFFFF")
 
-        // Coletando os dados do email e senha e chamando o método de login do ViewModel
         binding.btnEntrar.setOnClickListener {
             val email = binding.editEmail.text.toString()
             val senha = binding.editSenha.text.toString()
 
-            // Chamando o método de login do ViewModel
-            viewModel.onLoginClick(email, senha)
-        }
+            val res = bd.login(email,senha)
 
-        // Observa o resultado do login
-        viewModel.loginResult.observe(this) { loginResult ->
-            if (!isDestroyed && !isFinishing) {  // Certifique-se de que a Activity ainda está ativa
-                if (loginResult.success) {
-                    // Login bem-sucedido, redirecionar ou exibir mensagem de sucesso
-                    Snackbar.make(binding.root, "Login bem-sucedido!", Snackbar.LENGTH_SHORT).show()
-                    startActivity(Intent(this, TelaPrincipal::class.java))
-                } else {
-                    // Exibe mensagem de erro
-                    Snackbar.make(binding.root, loginResult.error ?: "Erro desconhecido", Snackbar.LENGTH_SHORT).show()
-                }
+            if (res == 1) {
+               Snackbar.make(binding.root, "Login bem-sucedido!", Snackbar.LENGTH_SHORT).show()
+                startActivity(Intent(this, TelaPrincipal::class.java))
+            } else {
+                Snackbar.make(binding.root, "Login Mal Sucessido", Snackbar.LENGTH_SHORT).show()
             }
         }
 
-        // Observa o estado de carregamento
         viewModel.loading.observe(this) { isLoading ->
-            if (!isDestroyed && !isFinishing) {  // Verifica o estado da Activity antes de mostrar o ProgressBar
+            if (!isDestroyed && !isFinishing) {
                 binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
             }
         }
     }
 
-    // Cancela qualquer tarefa ou operação em segundo plano no onDestroy
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.cancelLoginOperation()  // Implementar a função de cancelamento no ViewModel
+        viewModel.cancelLoginOperation()
     }
 }

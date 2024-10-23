@@ -19,7 +19,6 @@ class MeuBancoDeDados(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(db: SQLiteDatabase) {
         val sqlUser = """
-    -- Criação da tabela User
     CREATE TABLE User (
         Id_User INTEGER PRIMARY KEY autoincrement,
         Nome VARCHAR(255),
@@ -415,14 +414,13 @@ class MeuBancoDeDados(context: Context) : SQLiteOpenHelper(context, NOME_BANCO, 
         return db.insert("User", null, valores)
     }
 
-    fun verificarLogin(email: String, senha: String): Boolean {
+    fun login(email: String, senha: String): Int {
         val db = this.readableDatabase
         val query = "SELECT * FROM User WHERE Email = ? AND Senha = ?"
         val cursor = db.rawQuery(query, arrayOf(email, senha))
 
-        val loginValido = cursor.count > 0
+        val loginValido = if (cursor.count > 0) 1 else -1
         cursor.close()
-        db.close()
 
         return loginValido
     }
